@@ -8,7 +8,6 @@ export default class Drag {
     this.yy = 300
     this.curren_x = 200
     this.curren_y = 300
-    this.aa = true
     ctx.fillStyle = '#ffffff'
     ctx.font = '20px Arial'
     this.bindLoop = this.loop.bind(this)
@@ -29,7 +28,9 @@ export default class Drag {
 
     canvas.addEventListener('touchmove', ((e) => {
       e.preventDefault()
-      this.aa = false
+      if (!this.touched) {
+        return
+      }
       const x = e.touches[0].clientX
       const y = e.touches[0].clientY
       const target_x = x - this.x
@@ -52,7 +53,6 @@ export default class Drag {
 
     canvas.addEventListener('touchend', ((e) => {
       e.preventDefault()
-      this.aa = true
       this.touched = false
     }))
 
